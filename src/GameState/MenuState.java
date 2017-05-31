@@ -5,6 +5,8 @@ import TileMap.Background;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+import Audio.AudioPlayer;
+
 public class MenuState extends GameState {
 	
 	private Background bg;
@@ -20,9 +22,11 @@ public class MenuState extends GameState {
 	private Font titleFont;
 	
 	private Font font;
+	private AudioPlayer bgMusic;
 	
 	public MenuState(GameStateManager gsm) {
 		
+		init();
 		this.gsm = gsm;
 		
 		try {
@@ -45,7 +49,10 @@ public class MenuState extends GameState {
 		
 	}
 	
-	public void init() {}
+	public void init() {
+			bgMusic = new AudioPlayer("/Music/menuMusic.mp3");
+			bgMusic.play();
+	}
 	
 	public void update() {
 		bg.update();
@@ -78,10 +85,11 @@ public class MenuState extends GameState {
 	private void select() {
 		if(currentChoice == 0) {
 			gsm.setState(GameStateManager.LEVEL1STATE);
+			bgMusic.stop();
 		}
 		if(currentChoice == 1) {
-			// help
-		}
+			gsm.setState(GameStateManager.HELPSTATE);
+		}	
 		if(currentChoice == 2) {
 			System.exit(0);
 		}

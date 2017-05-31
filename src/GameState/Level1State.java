@@ -4,6 +4,7 @@ import Main.GamePanel;
 import TileMap.*;
 import Entity.*;
 import Entity.Enemies.*;
+import Audio.AudioPlayer;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -20,6 +21,8 @@ public class Level1State extends GameState {
 	private ArrayList<Explosion> explosions;
 	
 	private HUD hud;
+	
+	private AudioPlayer bgMusic;
 	
 	public Level1State(GameStateManager gsm) {
 		this.gsm = gsm;
@@ -44,6 +47,9 @@ public class Level1State extends GameState {
 		explosions = new ArrayList<Explosion>();
 		
 		hud = new HUD(player);
+		
+		bgMusic = new AudioPlayer("/Music/level1-1.mp3");
+		bgMusic.play();
 		
 	}
 	
@@ -138,8 +144,8 @@ public class Level1State extends GameState {
 		if(k == KeyEvent.VK_RIGHT) player.setRight(true);
 		if(k == KeyEvent.VK_UP) player.setUp(true);
 		if(k == KeyEvent.VK_DOWN) player.setDown(true);
-		if(k == KeyEvent.VK_W) player.setJumping(true);
-		if(k == KeyEvent.VK_E) player.setGliding(true);
+		if(k == KeyEvent.VK_SPACE) player.setJumping(true);
+		if(k == KeyEvent.VK_SHIFT) player.setGliding(true);
 		if(k == KeyEvent.VK_R) player.setScratching();
 		if(k == KeyEvent.VK_F) player.setFiring();
 	}
@@ -149,8 +155,8 @@ public class Level1State extends GameState {
 		if(k == KeyEvent.VK_RIGHT) player.setRight(false);
 		if(k == KeyEvent.VK_UP) player.setUp(false);
 		if(k == KeyEvent.VK_DOWN) player.setDown(false);
-		if(k == KeyEvent.VK_W) player.setJumping(false);
-		if(k == KeyEvent.VK_E) player.setGliding(false);
+		if(k == KeyEvent.VK_SPACE) player.setJumping(false);
+		if(k == KeyEvent.VK_SHIFT) player.setGliding(false);
 	}
 	
 }
